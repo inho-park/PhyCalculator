@@ -1,6 +1,7 @@
 package com.inho.phyculator.speed.api;
 
-import com.inho.phyculator.speed.dto.SpeedRequestDTO;
+import com.inho.phyculator.speed.dto.request.SpeedCoordinateDTO;
+import com.inho.phyculator.speed.dto.request.SpeedDistanceDTO;
 import com.inho.phyculator.speed.service.SpeedService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -18,11 +19,10 @@ public class SpeedController {
     final private SpeedService speedService;
 
     @GetMapping("/distance")
-    public ResponseEntity getSpeed(SpeedRequestDTO speedRequestDTO) {
+    public ResponseEntity getSpeedWithDistance(SpeedDistanceDTO speedDistanceDTO) {
         try {
-            double distance = speedRequestDTO.getDistance();
-            double time = speedRequestDTO.getTime();
-            log.info("distance : " + distance);
+            double distance = speedDistanceDTO.getDistance();
+            double time = speedDistanceDTO.getTime();
             return new ResponseEntity<>(speedService.getSpeed(distance, time), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -30,5 +30,16 @@ public class SpeedController {
         }
     }
 
-
+    @GetMapping("/coordinate")
+    public ResponseEntity getSpeedWithCoordinate(SpeedCoordinateDTO speedCoordinateDTO) {
+        try {
+            double start = speedCoordinateDTO.getStart();
+            double rear = speedCoordinateDTO.getRear();
+            double time = speedCoordinateDTO.getTime();
+            return new ResponseEntity<>(speedService.getSpeed(start, rear, time), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.inho.phyculator.speed.dto;
+package com.inho.phyculator.speed.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SpeedResultDTO {
-    private double speed;
+public class SpeedDistanceDTO {
+    private double distance;
+    private double time;
 }

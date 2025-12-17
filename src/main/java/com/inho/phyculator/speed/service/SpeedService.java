@@ -2,7 +2,7 @@ package com.inho.phyculator.speed.service;
 
 import static com.inho.phyculator.speed.message.ErrorMessage.ARITHMETIC_TIME_ERROR_MESSAGE;
 
-import com.inho.phyculator.speed.dto.SpeedResultDTO;
+import com.inho.phyculator.speed.dto.response.SpeedDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -11,12 +11,17 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SpeedService {
-    public SpeedResultDTO getSpeed(double distance, double time) {
-        speedValidCheck(distance, time);
-        return SpeedResultDTO.builder().speed(distance / time).build();
+    public SpeedDTO getSpeed(double distance, double time) {
+        speedValidCheck(time);
+        return SpeedDTO.builder().speed(distance / time).build();
     }
 
-    public void speedValidCheck(double distance, double time) {
+    public SpeedDTO getSpeed(double start, double rear, double time) {
+        speedValidCheck(time);
+        return SpeedDTO.builder().speed((rear - start) / time).build();
+    }
+
+    public void speedValidCheck(double time) {
         if (time <= 0d) {
             throw new ArithmeticException(ARITHMETIC_TIME_ERROR_MESSAGE.getMessage());
         }
