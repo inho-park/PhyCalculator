@@ -22,6 +22,11 @@ public class SpeedService {
         return SpeedDTO.builder().speed((rear - start) / time).build();
     }
 
+    public AccelerationDTO getAcceleration(double firstSpeed, double lastSpeed, double time) {
+        timeValidCheck(time);
+        return AccelerationDTO.builder().acceleration((lastSpeed - firstSpeed) / time).build();
+    }
+
     public void timeValidCheck(double time) {
         if (time <= 0d) {
             throw new ArithmeticException(ARITHMETIC_TIME_ERROR_MESSAGE.getMessage());

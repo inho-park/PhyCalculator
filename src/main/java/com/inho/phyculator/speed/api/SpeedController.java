@@ -1,5 +1,6 @@
 package com.inho.phyculator.speed.api;
 
+import com.inho.phyculator.speed.dto.request.AccelerationSpeedDTO;
 import com.inho.phyculator.speed.dto.request.SpeedCoordinateDTO;
 import com.inho.phyculator.speed.dto.request.SpeedDistanceDTO;
 import com.inho.phyculator.speed.service.SpeedService;
@@ -37,6 +38,19 @@ public class SpeedController {
             double rear = speedCoordinateDTO.getRear();
             double time = speedCoordinateDTO.getTime();
             return new ResponseEntity<>(speedService.getSpeed(start, rear, time), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/acceleration")
+    public ResponseEntity greAcceleration(AccelerationSpeedDTO accelerationSpeedDTO) {
+        try {
+            double firstSpeed = accelerationSpeedDTO.getFirstSpeed();
+            double lastSpeed = accelerationSpeedDTO.getLastSpeed();
+            double time = accelerationSpeedDTO.getTime();
+            return new ResponseEntity<>(speedService.getAcceleration(firstSpeed, lastSpeed, time), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
