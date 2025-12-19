@@ -1,5 +1,7 @@
 package com.inho.phyculator.speed.api;
 
+import static com.inho.phyculator.message.ErrorMessage.DOUBLE_PARSE_ERROR_MESSAGE;
+
 import com.inho.phyculator.speed.dto.request.AccelerationSpeedDTO;
 import com.inho.phyculator.speed.dto.request.SpeedCoordinateDTO;
 import com.inho.phyculator.speed.dto.request.SpeedDistanceDTO;
@@ -27,7 +29,7 @@ public class SpeedController {
             return new ResponseEntity<>(speedService.getSpeed(distance, time), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(DOUBLE_PARSE_ERROR_MESSAGE.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -40,7 +42,7 @@ public class SpeedController {
             return new ResponseEntity<>(speedService.getSpeed(start, rear, time), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(DOUBLE_PARSE_ERROR_MESSAGE.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -53,7 +55,7 @@ public class SpeedController {
             return new ResponseEntity<>(speedService.getAcceleration(firstSpeed, lastSpeed, time), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(DOUBLE_PARSE_ERROR_MESSAGE.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }
