@@ -28,7 +28,7 @@ public class ForceService {
         double mass = torqueForceDTO.getMass();
         double time = torqueForceDTO.getTime();
         ValidChecker.timeValidCheck(time);
-        double length = torqueForceDTO.getLength();
-        return TorqueDTO.builder().torque((lastSpeed - firstSpeed) / time * mass * length).build();
+        double radial = torqueForceDTO.getRadial();
+        return TorqueDTO.builder().torque((lastSpeed - firstSpeed) / time * mass * radial).build();
     }
 }

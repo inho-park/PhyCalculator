@@ -14,5 +14,5 @@ public class TorqueForceDTO {
     private double lastSpeed;
     private double mass;
     private double time;
-    private double length;
+    private double radial;
 }
